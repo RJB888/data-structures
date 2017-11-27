@@ -57,6 +57,12 @@ def test_bst_size_works():
     tree.insert(2)
     assert tree.size() == 1
 
+def test_bst_balance():
+    """Test balance gives right value."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 2, 1])
+    assert tree.balance() == 3
+
 def test_bst_size_on_large_tree():
     """Test bst size with larger tree."""
     from bst import BST
