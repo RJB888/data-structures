@@ -8,7 +8,7 @@ class Node(object):
         """Initialize Node."""
         self.l_child = None
         self.r_child = None
-        self.val = 0
+        self.val = val
 
 
 class BST(object):
@@ -16,7 +16,7 @@ class BST(object):
 
     def __init__(self, iterable=None):
         """Initialize the tree."""
-        self.size = 0
+        self.node_count = 0
         self.r_depth = 0
         self.l_depth = 0
         self.root = None
@@ -26,11 +26,11 @@ class BST(object):
 
     def insert(self, val):
         """Insert val into BST, if val is already there, ignore insertion."""
-        if not isinstance(val, [int, float]):
+        if not isinstance(val, (int, float)):
             raise ValueError("Only numbers are allowed.")
-        if self.size == 0:
+        if self.node_count == 0:
             self.root = Node(val)
-            self.size += 1
+            self.node_count += 1
             return
         elif self.contains(val):
             return
@@ -42,29 +42,32 @@ class BST(object):
                     cur = cur.l_child
                 else:
                     cur.l_child = Node(val)
-                    self.size += 1
+                    self.node_count += 1
+                    break
             else:
                 self.r_depth += 1
                 if cur.r_child:
                     cur = cur.r_child
                 else:
                     cur.r_child = Node(val)
-                    self.size += 1
+                    self.node_count += 1
+                    break
+
 
     def search(self, val):
         """Return the NODE containing that val. Else: None."""
         cur = self.root
         while cur:
-            if val == cur.data:
+            if val == cur.val:
                 return cur
-            elif val < cur.data:
+            elif val < cur.val:
                 cur = cur.l_child
-            elif val > cur.data:
+            elif val > cur.val:
                 cur = cur.r_child
 
     def size(self):
         """Return the int size of the BST. (# of nodes in tree, 0 if None."""
-        return self.size
+        return self.node_count
 
     def depth(self):
         """Return int representation of the tree depth."""
