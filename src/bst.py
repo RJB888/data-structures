@@ -19,6 +19,7 @@ class BST(object):
         self.node_count = 0
         self.r_depth = 0
         self.l_depth = 0
+        self._balance = 0
         self.root = None
         if isinstance(iterable, (list, tuple)):
             for item in iterable:
@@ -35,6 +36,10 @@ class BST(object):
         elif self.contains(val):
             return
         cur = self.root
+        if val < self.root.val:
+            self._balance += 1
+        else:
+            self._balance -= 1
         while cur:
             if val < cur.val:
                 self.l_depth += 1
@@ -52,7 +57,6 @@ class BST(object):
                     cur.r_child = Node(val)
                     self.node_count += 1
                     break
-
 
     def search(self, val):
         """Return the NODE containing that val. Else: None."""
@@ -82,4 +86,22 @@ class BST(object):
 
     def balance(self):
         """Return an int (pos/neg) showing balance of the tree."""
-        return self.l_depth - self.r_depth
+        return self._balance
+
+    if __name__ == '__main__':  # pragma: no cover
+        import timeit as ti
+        import BST
+        first_tree = BST([10, 9, 8, 7, 6, 5, 4, 3, 2, 1])
+        second_tree = BST([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        third_tree = BST([5, 6, 4, 7, 3, 8, 2, 9, 1, 10])
+
+        t1 = ti.timeit("first_tree.search(5)",
+                       setup="from __main__ import first_tree")
+        t2 = ti.timeit("second_tree.search(5)",
+                       setup="from __main__ import second_tree")
+        t3 = ti.timeit("third_tree.search(8)",
+                       setup="from __main__ import third_tree")
+
+        print('Negatively skewed tree search time: ', t1)
+        print('Positively skewed tree search time: ', t2)
+        print('Balanced tree search time: ', t3)
