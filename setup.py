@@ -7,11 +7,10 @@ from setuptools import setup
 setup(
     name="data-structures",
     description="Python data structures.",
-    author=["Robert Bronson", "Brendan Davis"],
-    author_email=["robert.j.bronson@gmail.com",
-                  "brendanmd@gmail.com"],
+    author=["Robert Bronson"],
+    author_email=["robert.j.bronson@gmail.com"],
     license="MIT",
-    py_modules=["deque"],
+    py_modules=["bst"],
     package_dir={'': 'src'},
     install_requires=[],
     extras_require={
