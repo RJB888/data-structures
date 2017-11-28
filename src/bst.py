@@ -8,6 +8,7 @@ class Node(object):
         """Initialize Node."""
         self.l_child = None
         self.r_child = None
+        self.parent = None
         self.val = val
 
 
@@ -47,6 +48,7 @@ class BST(object):
                     cur = cur.l_child
                 else:
                     cur.l_child = Node(val)
+                    cur.l_child.parent = cur
                     self.node_count += 1
                     break
             else:
@@ -55,6 +57,7 @@ class BST(object):
                     cur = cur.r_child
                 else:
                     cur.r_child = Node(val)
+                    cur.r_child.parent = cur
                     self.node_count += 1
                     break
 
@@ -87,6 +90,51 @@ class BST(object):
     def balance(self):
         """Return an int (pos/neg) showing balance of the tree."""
         return self._balance
+
+    def _delete_with_one_child(self, cur):
+        """Delete node with only one child."""
+        if cur.l_child:
+            if cur.parent.l_child == cur:
+                cur.parent.l_child = cur.l_child
+            else:
+                cur.parent.r_child = cur.l_child
+        else:  # cur has r_child
+            if cur.parent.l_child == cur:
+                cur.parent.l_child = cur.r_child
+            else:
+                cur.parent.r_child = cur.r_child
+
+    def _delete_with_two_children(self, cur):
+        """Remove a node with two children."""
+        old_root = cur
+        new_root = cur.l_child
+        while new_root:
+            if new_root.r_child:
+                new_root = new_root.r_child
+            else:
+                break
+        new_root.r_child = old_root.r_child
+        new_root.parent = old_root.parent
+        if new_root.l_child:
+            new_root.parent.r_child = new_root.l_child
+        elif new_root.parent != old_root:
+            new_root.l_child = old_root.l_child
+        if cur == self.root:
+            self.root = new_root
+
+    def delete(self, val):
+        """Remove indicated node from tree."""
+        cur = self.search(val)
+        if cur.l_child and cur.r_child:
+            self._delete_with_two_children(cur)
+        elif cur.l_child or cur.r_child:
+            self._delete_with_one_child(cur)
+        else:
+            rem = self.search(val)
+            if rem.parent.l_child == rem:
+                rem.parent.l_child = None
+            else:
+                rem.parent.r_child = None
 
     if __name__ == '__main__':  # pragma: no cover
         import timeit as ti
