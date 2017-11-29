@@ -131,11 +131,13 @@ class BST(object):
             self._delete_with_one_child(cur)
         else:
             rem = self.search(val)
-            if rem.parent.l_child == rem:
+            if rem == self.root:
+                self.root = None
+            elif rem.parent.l_child == rem:
                 rem.parent.l_child = None
             else:
                 rem.parent.r_child = None
-
+        self.node_count -= 1
     if __name__ == '__main__':  # pragma: no cover
         import timeit as ti
         import BST

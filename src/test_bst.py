@@ -110,3 +110,51 @@ def test_duplicate_value_insertion_ignored():
     tree.insert(1)
     tree.insert(1)
     assert tree.size() == 1
+
+
+def test_bst_delete_root_with_no_child():
+    """."""
+    from bst import BST
+    tree = BST()
+    tree.insert(1)
+    tree.delete(1)
+    assert tree.size() == 0
+
+def test_bst_delete_root_with_one_child():
+    """."""
+    from bst import BST
+    my_list = (3, 5, 6, 10)
+    tree = BST(my_list)
+    assert True
+
+def test_bst_delete_root_with_two_children():
+    """."""
+    from bst import BST
+    
+    assert True
+
+def test_bst_delete_node_with_no_child():
+    """."""
+    from bst import BST
+    my_list = (3, 5, 6, 10)
+    tree = BST(my_list)
+    tree.delete(10)
+    assert not tree.search(10)
+    assert tree.size() == 3
+
+
+def test_bst_delete_node_with_no_child():
+    """."""
+    from bst import BST
+    tree = BST()
+    tree.insert(1)
+    tree.delete(1)
+    assert True
+
+def test_bst_delete_node_with_no_child():
+    """."""
+    from bst import BST
+    tree = BST()
+    tree.insert(1)
+    tree.delete(1)
+    assert True
