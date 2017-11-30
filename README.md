@@ -28,6 +28,7 @@ balance
 (not implemented yet, but hopefully will be an O(n) operation because I want to track the depth as a attribute of the tree.)
 
 delete
+[![Build Status](https://travis-ci.org/RJB888/data-structures.svg?branch=deletion)](https://travis-ci.org/RJB888/data-structures)
 O((log n)k)I believe this is what it would be.  It runs the search function first, so the best it could be is O(log n) same as the search function.  The k comes in due to the fact that in some of the delete methods we havet to step over one node, then work down the node tree as far as it can go in one direction.. so "k" more steps depending on how far the branch goes.
 
 
