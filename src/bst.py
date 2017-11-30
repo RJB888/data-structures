@@ -94,11 +94,19 @@ class BST(object):
     def _delete_with_one_child(self, cur):
         """Delete node with only one child."""
         if cur.l_child:
+            if cur == self.root:
+                self.root = cur.l_child
+                self.root.parent = None
+                return
             if cur.parent.l_child == cur:
                 cur.parent.l_child = cur.l_child
             else:
                 cur.parent.r_child = cur.l_child
-        else:  # cur has r_child
+        else:  # cur has 
+            if cur == self.root:
+                self.root = cur.r_child
+                self.root.parent = None
+                return
             if cur.parent.l_child == cur:
                 cur.parent.l_child = cur.r_child
             else:

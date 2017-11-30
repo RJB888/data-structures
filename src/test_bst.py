@@ -111,6 +111,8 @@ def test_duplicate_value_insertion_ignored():
     tree.insert(1)
     assert tree.size() == 1
 
+# tree deletion tests start
+
 
 def test_bst_delete_root_with_no_child():
     """."""
@@ -120,18 +122,28 @@ def test_bst_delete_root_with_no_child():
     tree.delete(1)
     assert tree.size() == 0
 
+
 def test_bst_delete_root_with_one_child():
     """."""
     from bst import BST
     my_list = (3, 5, 6, 10)
     tree = BST(my_list)
-    assert True
+    tree.delete(3)
+    assert tree.size() == 3
+    assert tree.contains(6)
+    assert tree.contains(5)
+    assert tree.contains(10)
+
 
 def test_bst_delete_root_with_two_children():
     """."""
     from bst import BST
-    
-    assert True
+    my_list = (3, 2, 5, 6, 10)
+    tree = BST(my_list)
+    tree.delete(3)
+    assert tree.root.val == 2
+    assert tree.size() == 4
+
 
 def test_bst_delete_node_with_no_child():
     """."""
@@ -139,22 +151,34 @@ def test_bst_delete_node_with_no_child():
     my_list = (3, 5, 6, 10)
     tree = BST(my_list)
     tree.delete(10)
-    assert not tree.search(10)
+    assert tree.size() == 3
+    assert not tree.contains(10)
+
+
+def test_bst_delete_node_with_one_child():
+    """."""
+    from bst import BST
+    my_list = (3, 5, 6, 10)
+    tree = BST(my_list)
+    tree.delete(5)
+    assert not tree.contains(5)
     assert tree.size() == 3
 
 
-def test_bst_delete_node_with_no_child():
+def test_bst_delete_node_with_two_children():
     """."""
     from bst import BST
-    tree = BST()
-    tree.insert(1)
-    tree.delete(1)
-    assert True
+    my_list = (3, 2, 5, 6, 7, 10, 8)
+    tree = BST(my_list)
+    tree.delete(6)
+    assert tree.root.r_child.r_child.val == 7
 
-def test_bst_delete_node_with_no_child():
+
+def test_bst_delete_node_with_two_children_left_side():
     """."""
     from bst import BST
-    tree = BST()
-    tree.insert(1)
-    tree.delete(1)
-    assert True
+    my_list = (4, 2, 3, 5, 6, 7, 10, 8)
+    tree = BST(my_list)
+    tree.delete(4)
+    assert tree.root.val == 3
+    assert tree.root.l_child.val == 2
