@@ -19,7 +19,7 @@ O(1). Because we increment the size value of the tree when we insert and delete,
 
 
 depth
-
+(( not really implemented yet, so I don't know what the time complexity will be ))
 
 contains
 This will be the same as the search function because all it does is call the search function and return a boolean based on whether the search function returns something or not.
