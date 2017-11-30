@@ -18,9 +18,7 @@ class BST(object):
     def __init__(self, iterable=None):
         """Initialize the tree."""
         self.node_count = 0
-        self.r_depth = 0
-        self.l_depth = 0
-        self._balance = 0
+        self._balance = self.balance(self.root)
         self.root = None
         if isinstance(iterable, (list, tuple)):
             for item in iterable:
@@ -37,13 +35,8 @@ class BST(object):
         elif self.contains(val):
             return
         cur = self.root
-        if val < self.root.val:
-            self._balance += 1
-        else:
-            self._balance -= 1
         while cur:
             if val < cur.val:
-                self.l_depth += 1
                 if cur.l_child:
                     cur = cur.l_child
                 else:
@@ -52,7 +45,6 @@ class BST(object):
                     self.node_count += 1
                     break
             else:
-                self.r_depth += 1
                 if cur.r_child:
                     cur = cur.r_child
                 else:
@@ -76,9 +68,17 @@ class BST(object):
         """Return the int size of the BST. (# of nodes in tree, 0 if None."""
         return self.node_count
 
-    def depth(self):
+    def depth(self, node):
         """Return int representation of the tree depth."""
-        return self.l_depth if self.l_depth > self.r_depth else self.r_depth
+        if not node:
+            return (0)
+        else:
+            left_depth = self.depth(node.l_child)
+            right_depth = self.depth(node.r_child)
+            if left_depth > right_depth:
+                return left_depth + 1
+            else:
+                return right_depth + 1
 
     def contains(self, val):
         """Bool result for if val is in the tree."""
@@ -89,7 +89,8 @@ class BST(object):
 
     def balance(self):
         """Return an int (pos/neg) showing balance of the tree."""
-        return self._balance
+        return (self.depth(self.root.l_child) + 1) -\
+               (self.depth(self.root.r_child) + 1)
 
     def _delete_with_one_child(self, cur):
         """Delete node with only one child."""
@@ -102,7 +103,7 @@ class BST(object):
                 cur.parent.l_child = cur.l_child
             else:
                 cur.parent.r_child = cur.l_child
-        else:  # cur has 
+        else:
             if cur == self.root:
                 self.root = cur.r_child
                 self.root.parent = None

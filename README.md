@@ -33,5 +33,6 @@ O((log n)k)I believe this is what it would be.  It runs the search function firs
 
 
 Acknowledgements:
+Un3qual @ StackOverflow for depth algorithm
 Thanks to Gabriel Meringolo for assistance with the traversals.
 
