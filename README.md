@@ -19,13 +19,14 @@ O(1). Because we increment the size value of the tree when we insert and delete,
 
 
 depth
-(( not really implemented yet, so I don't know what the time complexity will be ))
+O(n) This ends up being O(n) because it is actually recursing through every node in the tree to measure its depth. 
 
 contains
 This will be the same as the search function because all it does is call the search function and return a boolean based on whether the search function returns something or not.
 
 balance
-(not implemented yet, but hopefully will be an O(n) operation because I want to track the depth as a attribute of the tree.)
+O(log n) or O(n) Requires the use of the depth function which ends up being O(log n) or O(n) if the tree is unbalanced.  Once the rotations are implemented this will be O(log n).
+
 
 delete
 [![Build Status](https://travis-ci.org/RJB888/data-structures.svg?branch=deletion)](https://travis-ci.org/RJB888/data-structures)

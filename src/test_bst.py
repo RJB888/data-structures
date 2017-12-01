@@ -67,7 +67,21 @@ def test_bst_balance():
     """Test balance gives right value."""
     from bst import BST
     tree = BST([10, 5, 3, 8, 12, 15, 2, 1])
-    assert tree.balance() == 3
+    assert tree.balance(tree.root) == 2
+
+
+def test_bst_balance_non_root():
+    """Test balance gives right value."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 2, 1])
+    assert tree.balance(tree.search(5)) == 2
+
+
+def test_bst_balance_gives_zero_balance():
+    """Test balance gives right value."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 11])
+    assert tree.balance(tree.search(12)) == 0
 
 
 def test_bst_size_on_large_tree():
@@ -111,6 +125,30 @@ def test_duplicate_value_insertion_ignored():
     tree.insert(1)
     assert tree.size() == 1
 
+# depth tests start
+
+
+def test_bst_depth_gives_proper_value():
+    """Test that search gives node with proper value."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 2, 1, 0])
+    assert tree.depth(tree.root) == 5
+
+
+def test_bst_depth_tree_with_no_nodes():
+    """Test that search gives node with proper value."""
+    from bst import BST
+    tree = BST()
+    assert tree.depth(tree.root) == 0
+
+
+def test_bst_depth_tree_with_one_nodes():
+    """Test that search gives node with proper value."""
+    from bst import BST
+    tree = BST([1])
+    assert tree.depth(tree.root) == 0
+# NOTE: Balance tests test the depth, becuase balance calls depth.
+
 # tree deletion tests start
 
 
@@ -135,6 +173,44 @@ def test_bst_delete_root_with_one_child():
     assert tree.contains(10)
 
 
+def test_bst_delete_root_with_only_left_child():
+    """."""
+    from bst import BST
+    my_list = (5, 3, 1, 0)
+    tree = BST(my_list)
+    tree.delete(5)
+    assert tree.size() == 3
+    assert tree.contains(0)
+    assert tree.contains(3)
+    assert tree.contains(1)
+    assert tree.root.val == 3
+
+
+def test_bst_delete_with_left_right_child():
+    """."""
+    from bst import BST
+    my_list = (7, 5, 3, 4)
+    tree = BST(my_list)
+    tree.delete(3)
+    assert tree.size() == 3
+    assert tree.contains(5)
+    assert tree.contains(7)
+    assert tree.root.l_child.l_child.val == 4
+
+
+def test_bst_delete_with_right_left_right_child():
+    """."""
+    from bst import BST
+    my_list = (4, 7, 6, 5)
+    tree = BST(my_list)
+    tree.delete(7)
+    assert tree.size() == 3
+    assert tree.contains(5)
+    assert not tree.contains(7)
+    assert tree.contains(4)
+    assert tree.root.r_child.l_child.val == 5
+
+
 def test_bst_delete_root_with_two_children():
     """."""
     from bst import BST
@@ -155,7 +231,7 @@ def test_bst_delete_node_with_no_child():
     assert not tree.contains(10)
 
 
-def test_bst_delete_node_with_one_child():
+def test_bst_delete_node_with_only_right_child():
     """."""
     from bst import BST
     my_list = (3, 5, 6, 10)
@@ -163,6 +239,18 @@ def test_bst_delete_node_with_one_child():
     tree.delete(5)
     assert not tree.contains(5)
     assert tree.size() == 3
+    assert tree.root.r_child.val == 6
+
+
+def test_bst_delete_node_with_only_left_child():
+    """."""
+    from bst import BST
+    my_list = (5, 3, 1, 0)
+    tree = BST(my_list)
+    tree.delete(3)
+    assert not tree.contains(3)
+    assert tree.size() == 3
+    assert tree.root.l_child.val == 1
 
 
 def test_bst_delete_node_with_two_children():

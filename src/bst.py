@@ -18,8 +18,8 @@ class BST(object):
     def __init__(self, iterable=None):
         """Initialize the tree."""
         self.node_count = 0
-        self._balance = self.balance(self.root)
         self.root = None
+        self._balance = 0
         if isinstance(iterable, (list, tuple)):
             for item in iterable:
                 self.insert(item)
@@ -65,13 +65,15 @@ class BST(object):
                 cur = cur.r_child
 
     def size(self):
-        """Return the int size of the BST. (# of nodes in tree, 0 if None."""
+        """Return the int size of the BST."""
         return self.node_count
 
     def depth(self, node):
         """Return int representation of the tree depth."""
+        if not self.root:
+            return 0
         if not node:
-            return (0)
+            return (-1)
         else:
             left_depth = self.depth(node.l_child)
             right_depth = self.depth(node.r_child)
@@ -87,10 +89,10 @@ class BST(object):
         else:
             return False
 
-    def balance(self):
+    def balance(self, node):
         """Return an int (pos/neg) showing balance of the tree."""
-        return (self.depth(self.root.l_child) + 1) -\
-               (self.depth(self.root.r_child) + 1)
+        return (self.depth(node.l_child) + 1) -\
+               (self.depth(node.r_child) + 1)
 
     def _delete_with_one_child(self, cur):
         """Delete node with only one child."""
