@@ -149,6 +149,122 @@ def test_bst_depth_tree_with_one_nodes():
     assert tree.depth(tree.root) == 0
 # NOTE: Balance tests test the depth, becuase balance calls depth.
 
+# traversal tests
+
+
+def test_breadth_first_traversal_no_values():
+    """."""
+    from bst import BST
+    from types import GeneratorType
+    tree = BST()
+    assert isinstance(tree.breadth_first_traverse(), GeneratorType)
+
+
+def test_depth_first_traversal_one_value():
+    """."""
+    from bst import BST
+    tree = BST([1])
+    gen = tree.breadth_first_traverse()
+    my_list = []
+    my_list.append(next(gen))
+    assert my_list[0] == 1
+
+
+def test_breadth_first_traversal_multiple_values():
+    """."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 2, 1, 0])
+    gen = tree.breadth_first_traverse()
+    my_list = []
+    for item in gen:
+        my_list.append(item)
+    assert my_list == [10, 5, 12, 3, 8, 15, 2, 1, 0]
+
+
+def test_in_order_traverse_no_value():
+    """."""
+    from bst import BST
+    from types import GeneratorType
+    tree = BST([])
+    gen = tree.in_order_traverse()
+    assert isinstance(gen, GeneratorType)
+
+
+def test_in_order_traverse_one_value():
+    """."""
+    from bst import BST
+    tree = BST([1])
+    gen = tree.in_order_traverse()
+    assert next(gen) == 1
+
+
+def test_in_order_traversal_multiple_values():
+    """."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 2, 1, 0])
+    my_list = []
+    gen = tree.in_order_traverse()
+    for item in gen:
+        my_list.append(item)
+    assert my_list == [0, 1, 2, 3, 5, 8, 10, 12, 15]
+
+
+def test_preorder_traverse_no_value():
+    """."""
+    from bst import BST
+    from types import GeneratorType
+    tree = BST([])
+    gen = tree.preorder_traverse()
+    assert isinstance(gen, GeneratorType)
+
+
+def test_preorder_traverse_one_value():
+    """."""
+    from bst import BST
+    tree = BST([1])
+    gen = tree.preorder_traverse()
+    assert next(gen) == 1
+
+
+def test_preorder_traversal_multiple_values():
+    """."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 2, 1, 0])
+    my_list = []
+    gen = tree.preorder_traverse()
+    for item in gen:
+        my_list.append(item)
+    assert my_list == [10, 5, 3, 2, 1, 0, 8, 12, 15]
+
+
+def test_postord_traverse_no_value():
+    """."""
+    from bst import BST
+    from types import GeneratorType
+    tree = BST([])
+    gen = tree.postorder_traverse()
+    assert isinstance(gen, GeneratorType)
+
+
+def test_postord_traverse_one_value():
+    """."""
+    from bst import BST
+    tree = BST([1])
+    gen = tree.postorder_traverse()
+    assert next(gen) == 1
+
+
+def test_postord_traversal_multiple_values():
+    """."""
+    from bst import BST
+    tree = BST([10, 5, 3, 8, 12, 15, 2, 1, 0])
+    my_list = []
+    gen = tree.postorder_traverse()
+    for item in gen:
+        my_list.append(item)
+    assert my_list == [0, 1, 2, 3, 8, 5, 15, 12, 10]
+
+
 # tree deletion tests start
 
 

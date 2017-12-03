@@ -149,6 +149,66 @@ class BST(object):
             else:
                 rem.parent.r_child = None
         self.node_count -= 1
+
+# Traversals
+
+    def breadth_first_traverse(self):
+        """Use breadth first traversal to read back a bst, as a generator."""
+        to_visit = []
+        cur = self.root
+        while cur or to_visit:
+            if cur:
+                yield cur.val
+                to_visit.extend([cur.l_child, cur.r_child])
+                cur = to_visit.pop(0)
+            else:
+                cur = to_visit.pop(0)
+
+    def _i_o_recurse(self, node, a_list):
+            """Helper recusive func."""
+            if node is not None:
+                self._i_o_recurse(node.l_child, a_list)
+                a_list.append(node.val)
+                self._i_o_recurse(node.r_child, a_list)
+            return a_list
+
+    def in_order_traverse(self):
+        """Traverse a tree and yield values in numeric order."""
+        new_list = []
+        self._i_o_recurse(self.root, new_list)
+        for item in new_list:
+            yield item
+
+    def _preord_recurse(self, node, a_list):
+            """Helper recusive func."""
+            if node is not None:
+                a_list.append(node.val)
+                self._preord_recurse(node.l_child, a_list)
+                self._preord_recurse(node.r_child, a_list)
+            return a_list
+
+    def preorder_traverse(self):
+        """Traverse a tree and yield values in numeric order."""
+        new_list = []
+        self._preord_recurse(self.root, new_list)
+        for item in new_list:
+            yield item
+
+    def _postord_recurse(self, node, a_list):
+            """Helper recusive func."""
+            if node is not None:
+                self._postord_recurse(node.l_child, a_list)
+                self._postord_recurse(node.r_child, a_list)
+                a_list.append(node.val)
+            return a_list
+
+    def postorder_traverse(self):
+        """Traverse a tree and yield values in numeric order."""
+        new_list = []
+        self._postord_recurse(self.root, new_list)
+        for item in new_list:
+            yield item
+
     if __name__ == '__main__':  # pragma: no cover
         import timeit as ti
         import BST

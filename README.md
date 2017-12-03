@@ -32,8 +32,20 @@ delete
 [![Build Status](https://travis-ci.org/RJB888/data-structures.svg?branch=deletion)](https://travis-ci.org/RJB888/data-structures)
 O((log n)k)I believe this is what it would be.  It runs the search function first, so the best it could be is O(log n) same as the search function.  The k comes in due to the fact that in some of the delete methods we havet to step over one node, then work down the node tree as far as it can go in one direction.. so "k" more steps depending on how far the branch goes.
 
+breadth first traversal
+O(n) This traverses all of the nodes in the tree and yields them.
+
+in order traversal
+O(n) Traverses all of the nodes in the tree and yields them.
+
+pre order traversal
+O(n) Traverses all of the nodes in the tree and yields them.
+
+post order traversal
+O(n) Traverses all of the nodes in the tree and yields them.
 
 Acknowledgements:
-Un3qual @ StackOverflow for depth algorithm
-Thanks to Gabriel Meringolo for assistance with the traversals.
+Un3qual @ StackOverflow for depth algorithm,
+Gabriel Meringolo for assistance with the traversals,
+Michael McMillan - Data Structures and Algorithms with JavaScript
 
