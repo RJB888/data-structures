@@ -14,6 +14,7 @@ class HashTable(object):
         total = 0
         for char in word:
             total += ord(char)
+            print(total)
         return int(total % len(self.table))
 
     def horner(self, word):
@@ -22,6 +23,7 @@ class HashTable(object):
         total = 0
         for char in word:
             total += MODIFIER * total + ord(char)
+            print(total)
         return int(total % len(self.table))
 
     def get(self, key):
