@@ -23,10 +23,15 @@ class LinkedList{
   }
 
   pop(){
-    let temp = this.head.value
-    this.head = this.head.next
-    this.size --
-    return temp
+    if(this.head === null){
+      return 'List is empty'
+    }
+    else{
+      let temp = this.head.value
+      this.head = this.head.next
+      this.size --
+      return temp
+    }
 
   }
 
@@ -36,15 +41,22 @@ class LinkedList{
 
   search(val){
     let tempNode = this.head
-    while(tempNode !== null){
-      if (tempNode.val === val){
-        return tempNode
-      }
-      else{
-        tempNode = tempNode.next
+    if (this.head === null){
+      return 'List is empty.'
+    }
+    try{
+      while(tempNode !== null){
+        if (tempNode.val === val){
+          return tempNode
+        }
+        else{
+          tempNode = tempNode.next
+        }
       }
     }
-    return
+    catch(e){
+      return 'Node not found.'
+    }
   }
 
   remove(val){
@@ -60,7 +72,13 @@ class LinkedList{
   }
 
   display(){
-
+    let cur = this.head
+    let output = []
+    while (cur !== null ){
+      output.append(cur.val)
+      cur = cur.next
+    }
+    return output.join(', ')
   }
 
 }
