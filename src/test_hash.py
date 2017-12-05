@@ -27,12 +27,19 @@ def test_horner_method():
 
 def test_hash():
     """Test that _hash hashes the key according to hash type."""
-    pass
+    from hashing import HashTable
+    tbl = HashTable()
+    tbl2 = HashTable(137, 'horner')
+    assert tbl._hash('boo') == 46
+    assert tbl2._hash('boo') == 73
 
 
 def test_get_method():
     """Test that get method retrieves value."""
-    pass
+    from hashing import HashTable
+    tbl = HashTable()
+    tbl.set('balloon', 'face')
+    assert tbl.get('balloon') == 'face'
 
 
 def test_set_method():
@@ -41,4 +48,4 @@ def test_set_method():
     tbl = HashTable()
     tbl.set('apple', 'apple')
     assert tbl.table
-    assert tbl.table[tbl._hash('apple')] == 'apple'
+    assert tbl.table[tbl._hash('apple')][0][1] == 'apple'

@@ -6,7 +6,7 @@ class HashTable(object):
 
     def __init__(self, size=137, method='additive'):
         """Initialize the hash table."""
-        self.table = [None] * size
+        self.table = [[]] * size
         self.method = method
 
     def additive(self, word):
@@ -14,7 +14,6 @@ class HashTable(object):
         total = 0
         for char in word:
             total += ord(char)
-            print(total)
         return int(total % len(self.table))
 
     def horner(self, word):
@@ -23,18 +22,25 @@ class HashTable(object):
         total = 0
         for char in word:
             total += MODIFIER * total + ord(char)
-            print(total)
         return int(total % len(self.table))
 
     def get(self, key):
         """Return the value associated with the key."""
+        if not isinstance(key, str):
+            raise ValueError("Only strings allowed.")
         idx = self._hash(key)
-        return self.table[idx]
+        output = [tup for tup in self.table[idx] if tup[0] == key]
+        return output[0][1]
 
     def set(self, key, val):
         """Store the given val using given key."""
+        if not isinstance(key, str) or not isinstance(val, str):
+            raise ValueError("Only strings allowed.")
         idx = self._hash(key)
-        self.table[idx] = val
+        if self.table[idx]:
+            self.table[idx].append((key, val))
+        else:
+            self.table[idx] = [(key, val)]
 
     def _hash(self, key):
         """Hash the provided key by hash type."""
