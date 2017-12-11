@@ -17,8 +17,8 @@ def merge_recurser(arr, first, last):
 
 def merge_sorter(arr, first, middle, last):
     """Sort and re-merge numbers into array."""
-    l_side = arr[first:middle]
-    r_side = arr[middle:last + 1]
+    l_side = arr[first:middle + 1]
+    r_side = arr[middle + 1: last + 1]
     l_side.append(float('inf'))
     r_side.append(float('inf'))
     l_idx = r_idx = 0
