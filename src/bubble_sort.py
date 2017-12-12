@@ -1,20 +1,20 @@
 """Implement a bubble sort."""
 
 
-def bubble_sort(list):
+def bubble_sort(list_in):
     """Bubble sort."""
-    if not list:
-        raise IndexError("Cannot use an empty list.")
+    if not list_in:
+        return []
     swap = True
     while swap:
         swap = False
-        for i in range(1, len(list)):
-            if list[i] < list[i - 1]:
-                temp = list[i]
-                list[i] = list[i - 1]
-                list[i - 1] = temp
+        for i in range(1, len(list_in)):
+            if list_in[i] < list_in[i - 1]:
+                temp = list_in[i]
+                list_in[i] = list_in[i - 1]
+                list_in[i - 1] = temp
                 swap = True
-    return list
+    return list_in
 
 
 if __name__ == "__main__":  # pragma: no cover

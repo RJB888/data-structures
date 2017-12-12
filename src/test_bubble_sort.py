@@ -1,14 +1,13 @@
 """Run tests for bubble sort function."""
 
-import pytest
+
 import random
 
 
-def test_empty_list_raises_error():
+def test_empty_list_returns_empty_list():
     """Test that an empty list raises an index error."""
     from bubble_sort import bubble_sort
-    with pytest.raises(IndexError):
-        bubble_sort([])
+    assert bubble_sort([]) == []
 
 
 def test_small_list_is_sorted():
