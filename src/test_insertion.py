@@ -1,15 +1,13 @@
 """Test Insertion Sort function."""
 
 
-import pytest
 import random
 
 
 def test_empty_list_raises_error():
     """Test that an empty list raises an index error."""
     from insertion import insertion_sort
-    with pytest.raises(IndexError):
-        insertion_sort([])
+    assert insertion_sort([]) == []
 
 
 def test_small_list_is_sorted():

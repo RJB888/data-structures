@@ -4,7 +4,7 @@
 def insertion_sort(potato):
     """Sort by insertion method."""
     if not potato:
-        raise IndexError
+        return []
     for i in range(1, len(potato)):
         swap_index = i
         while swap_index > 0 and potato[swap_index] < potato[swap_index - 1]:
