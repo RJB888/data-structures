@@ -1,20 +1,23 @@
-"""."""
+
+"""Setup file for data-structures package."""
+
 
 from setuptools import setup
 
-setup(
 
-    name='data structures',
-    description='data structures',
+setup(
+    name="data-structures",
+    description="Python data structures.",
+    author=["Robert Bronson"],
+    author_email=["robert.j.bronson@gmail.com"],
+    license="MIT",
+    py_modules=["bst"],
     package_dir={'': 'src'},
-    author='Robert Bronson',
-    author_email='robert.j.bronson@gmail.com',
-    py_modules=['insertion'],
     install_requires=[],
     extras_require={
-        'testing': ['pytest', 'pytest-cov', 'tox'],
+        'testing': ['pytest', 'pytest-cov', 'pytest-watch', 'tox', 'ipython'],
         'development': ['ipython']
     },
-    entry_points={}
-
+    entry_points={
+    }
 )
