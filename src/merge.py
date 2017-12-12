@@ -1,9 +1,12 @@
 """Create a merge sort."""
 
 
-def merge_controller(arr):
+def merge(arr):
     """Take an array and start merge sort on it."""
+    if not arr:
+        return []
     merge_recurser(arr, 0, (len(arr) - 1))
+    return arr
 
 
 def merge_recurser(arr, first, last):
@@ -35,23 +38,23 @@ def merge_sorter(arr, first, middle, last):
 if __name__ == "__main__":  # pragma: no cover
     import timeit as time
     import random
-    reps = 100000
+    reps = 10000
     rev = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
     fwd = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     rand_sm = random.sample(range(100), 20)
     rand_lg = random.sample(range(2000), 500)
-    t1 = time.timeit("merge_controller(rev)",
+    t1 = time.timeit("merge(rev)",
                      number=reps,
-                     setup="from __main__ import merge_controller, rev")
-    t2 = time.timeit("merge_controller(fwd)",
+                     setup="from __main__ import merge, rev")
+    t2 = time.timeit("merge(fwd)",
                      number=reps,
-                     setup="from __main__ import merge_controller, fwd")
-    t3 = time.timeit("merge_controller(rand_sm)",
+                     setup="from __main__ import merge, fwd")
+    t3 = time.timeit("merge(rand_sm)",
                      number=reps,
-                     setup="from __main__ import merge_controller, rand_sm")
-    t4 = time.timeit("merge_controller(rand_lg)",
+                     setup="from __main__ import merge, rand_sm")
+    t4 = time.timeit("merge(rand_lg)",
                      number=reps,
-                     setup="from __main__ import merge_controller, rand_lg")
+                     setup="from __main__ import merge, rand_lg")
 
     print("Reversed list: ", t1)
     print("Ordered list: ", t2)
