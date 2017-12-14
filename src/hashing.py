@@ -26,11 +26,14 @@ class HashTable(object):
 
     def get(self, key):
         """Return the value associated with the key."""
-        if not isinstance(key, str):
-            raise ValueError("Only strings allowed.")
-        idx = self._hash(key)
-        output = [tup for tup in self.table[idx] if tup[0] == key]
-        return output[0][1]
+        try:
+            if not isinstance(key, str):
+                raise ValueError("Only strings allowed.")
+            idx = self._hash(key)
+            output = [tup for tup in self.table[idx] if tup[0] == key]
+            return output[0][1]
+        except(IndexError):
+            return
 
     def set(self, key, val):
         """Store the given val using given key."""

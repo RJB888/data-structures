@@ -42,6 +42,21 @@ def test_get_method():
     assert tbl.get('balloon') == 'face'
 
 
+def test_get_on_empty_hashtable():
+    """Test that getting a value on empty table returns none."""
+    from hashing import HashTable
+    tbl = HashTable()
+    assert tbl.get("boom") is None
+
+
+def test_get_value_not_in_hashtable():
+    """Test that getting a value that isn't in the table returns none."""
+    from hashing import HashTable
+    tbl = HashTable()
+    tbl.set('balloon', 'face')
+    assert tbl.get("boom") is None
+
+
 def test_set_method():
     """Test that set method sets key and value."""
     from hashing import HashTable
