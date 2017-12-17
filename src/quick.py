@@ -1,31 +1,25 @@
 """Quick sort some list."""
 
 
-def quick_sort(list_in):
+def quick_sort(list_in, pivot, end):
     """Implement the quick sort."""
-    pivot = 0
-    fwd = 1
-    end = len(list_in) - 1
-    if len(list_in) > 1:
-        while fwd < end:
-            if list_in[fwd] >= list_in[pivot]:
-                while list_in[end] > list_in[pivot]:
-                    end -= 1
-                # swap val at fwd point with val at end point
-                list_in[end], list_in[fwd] = list_in[fwd], list_in[end]
-                end -= 1
-                fwd += 1
-            else:
-                fwd += 1
-        while list_in[end] > list_in[pivot]:
-            if list_in[end] == list_in[pivot]:
-                end -= 1
-                fwd += 1
-            else:
-                end -= 1
-        list_in[end], list_in[pivot] = list_in[pivot], list_in[end]
-        # recurse -- use list_in at [pivot + 1:end]
-        return quick_sort(list_in[:end]) + list(list_in[end]) +\
-            quick_sort(list_in[(end + 1):])
-    else:
+    first = pivot
+    last = end
+    fwd = pivot + 1
+    if last - first < 2:
         return list_in
+    while fwd <= end:
+        while list_in[fwd] < list_in[pivot]:
+            if fwd == last:
+                break
+            fwd += 1
+        while list_in[end] > list_in[pivot]:
+            if end == first:
+                break
+            end -= 1
+        if fwd < end:
+            list_in[end], list_in[fwd] = list_in[fwd], list_in[end]
+        else:
+            list_in[pivot], list_in[end] = list_in[end], list_in[pivot]
+            return quick_sort(list_in, first, end - 1),\
+                quick_sort(list_in, end + 1, last)
