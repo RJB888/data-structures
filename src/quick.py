@@ -6,7 +6,7 @@ def quick_sort(list_in, pivot, end):
     first = pivot
     last = end
     fwd = pivot + 1
-    if last - first < 2:
+    if last - first < 1:
         return list_in
     while fwd <= end:
         while list_in[fwd] < list_in[pivot]:
