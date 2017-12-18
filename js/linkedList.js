@@ -45,25 +45,21 @@ class LinkedList{
     if (this.head === null){
       return 'List is empty.'
     }
-    try{
-      while(tempNode !== null){
-        if (tempNode.val === val){
-          return tempNode
-        }
-        else{
-          tempNode = tempNode.next
-        }
+    while(tempNode !== null){
+      if (tempNode.value === val){
+        return tempNode
+      }
+      else{
+        tempNode = tempNode.next
       }
     }
-    catch(e){
-      return 'Node not found.'
-    }
+    return 'Node not found.'
   }
 
   remove(val){
     let curr = this.head
     while (curr !== null ){
-      if (curr.next === val){
+      if (curr.next.value === val){
         curr.next = curr.next.next
         this.size --
         return
@@ -73,10 +69,12 @@ class LinkedList{
   }
 
   display(){
+    if (this.head === null)
+      return
     let cur = this.head
     let output = []
     while (cur !== null ){
-      output.append(cur.val)
+      output.push(cur.value)
       cur = cur.next
     }
     return output.join(', ')
